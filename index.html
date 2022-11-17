@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Gtes_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[45.22316216725782,-5.57139313037101],[48.587964530766364,3.5417660493164806]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_MapboxStreet_0');
+        map.getPane('pane_MapboxStreet_0').style.zIndex = 400;
+        var layer_MapboxStreet_0 = L.tileLayer('https://api.mapbox.com/styles/v1/chevrierleo/cla6m9efm00il14nxmmkcm6zt/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2hldnJpZXJsZW8iLCJhIjoiY2w5cjRkMGV5MGhmczN2cXIzdDNnNjJnbCJ9.VVLgNd-2yZFI668l_m_Caw', {
+            pane: 'pane_MapboxStreet_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_MapboxStreet_0;
+        map.addLayer(layer_MapboxStreet_0);
+        function pop_Gtes_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Lien Web</th>\
+                        <td>' + (feature.properties['Lien Web'] !== null ? autolinker.link(feature.properties['Lien Web'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Prix à la semaine</th>\
+                        <td>' + (feature.properties['Prix à la semaine'] !== null ? autolinker.link(feature.properties['Prix à la semaine'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Forfait ménage</th>\
+                        <td>' + (feature.properties['Forfait ménage'] !== null ? autolinker.link(feature.properties['Forfait ménage'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Disponible du 30/07 au 06/08 2023</th>\
+                        <td>' + (feature.properties['Disponible du 30/07 au 06/08 2023'] !== null ? autolinker.link(feature.properties['Disponible du 30/07 au 06/08 2023'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Commnentaire</th>\
+                        <td>' + (feature.properties['Commnentaire'] !== null ? autolinker.link(feature.properties['Commnentaire'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Prix par famille ménage compris (sans les parents)</th>\
+                        <td>' + (feature.properties['Prix par famille ménage compris (sans les parents)'] !== null ? autolinker.link(feature.properties['Prix par famille ménage compris (sans les parents)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Gtes_1_0() {
+            return {
+                pane: 'pane_Gtes_1',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,144,233,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Gtes_1');
+        map.getPane('pane_Gtes_1').style.zIndex = 401;
+        map.getPane('pane_Gtes_1').style['mix-blend-mode'] = 'normal';
+        var layer_Gtes_1 = new L.geoJson(json_Gtes_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Gtes_1',
+            layerName: 'layer_Gtes_1',
+            pane: 'pane_Gtes_1',
+            onEachFeature: pop_Gtes_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Gtes_1_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Gtes_1);
+        map.addLayer(layer_Gtes_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Gtes_1.png" /> Gîtes': layer_Gtes_1,"Mapbox Street": layer_MapboxStreet_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
